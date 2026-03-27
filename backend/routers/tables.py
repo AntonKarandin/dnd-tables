@@ -2,8 +2,6 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
-from sqlalchemy.util import await_only
-from watchfiles import awatch
 
 from backend.database import get_db
 from backend.models import Table, TableRow
@@ -27,7 +25,7 @@ async def list_tables(db: AsyncSession = Depends(get_db)):
     result = await db.execute(
         select(Table).options(selectinload(Table.rows)).order_by(Table.id)
     )
-    return result.scalar().all()
+    return result.scalars().all()
 
 
 @router.post("", response_model=TableOut, status_code=status.HTTP_201_CREATED)

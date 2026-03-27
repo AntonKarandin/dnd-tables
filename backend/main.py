@@ -12,22 +12,27 @@ from backend.routers.tables import router as tables_router
 
 async def _seed_if_empty():
     from sqlalchemy import select, func
-    from backend.models import Table
-    from backend.schemas import TableCreate, TableRowSchema
+    from backend.models import Table, TableRow
     from backend.seem import DEFAULT_TABLES
 
     async with AsyncSessionLocal() as db:
         count = await db.scalar(select(func.count()).select_from(Table))
         if count == 0:
-            from backend.routers.tables import create_table
             for t in DEFAULT_TABLES:
-                payload = TableCreate(
+                table = Table(
                     name=t["name"],
                     system=t["system"],
-                    dice_type=t["dice_type"],
-                    rows=[TableRowSchema(**r) for r in t["rows"]],
+                    dice_type=t["dice_type"]
                 )
-                await create_table(payload, db)
+            db.add(table)
+            await db.flush()
+            for row in t["rows"]:
+                db.add(TableRow(
+                    table_id=table.id,
+                    roll_id=row["roll_id"],
+                    value=row["value"]
+                ))
+            await db.commit()
 
 
 @asynccontextmanager
