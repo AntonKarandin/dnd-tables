@@ -1,6 +1,14 @@
 import { useState } from "react";
 
 const DICE_TYPES = ["d4", "d6", "d8", "d10", "d12", "d20", "d100"];
+
+function handleDiceTypeChange(val) {
+    setDiceType(val);
+    const isStandard = DICE_TYPES.includes(val);
+    const minRoll = isStandard ? 1 : 2;
+    setRows(prev => prev.map((r, i) => ({ ...r, roll_id: minRoll + i})));
+};
+
 const SYSTEMS = ["D&D 5e", "Pathfinder 2e", "Other"];
 
 export default function TableEditor({ initial, onSave, onCancel }) {
@@ -19,7 +27,8 @@ export default function TableEditor({ initial, onSave, onCancel }) {
   }
 
   function addRow() {
-    const nextId = rows.length ? Math.max(...rows.map((r) => r.roll_id)) + 1 : 1;
+    const minRoll = DICE_TYPES.includes(diceType) ? 1 : 2;
+    const nextId = rows.length ? Math.max(...rows.map((r) => r.roll_id)) + 1 : minRoll;
     setRows((prev) => [...prev, { roll_id: nextId, value: "" }]);
   }
 
