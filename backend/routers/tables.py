@@ -45,7 +45,7 @@ async def create_table(payload: TableCreate, db: AsyncSession = Depends(get_db))
     return await _get_table_or_404(table.id, db)
 
 
-@router.get("/{table_id}", response_model=TableOut):
+@router.get("/{table_id}", response_model=TableOut)
 async def get_table(table_id: int, db: AsyncSession = Depends(get_db)):
     return await _get_table_or_404(table_id, db)
 
@@ -71,7 +71,7 @@ async def update_table(
     return await _get_table_or_404(table.id, db)
 
 
-@router.delete("/{table_id}", status_code=status.HTTP_204_NO_CONTENT):
+@router.delete("/{table_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_table(table_id: int, db: AsyncSession = Depends(get_db)):
     table = await _get_table_or_404(table_id, db)
     await db.delete(table)
