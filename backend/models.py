@@ -8,7 +8,7 @@ class Table(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(200), nullable=False)
     system: Mapped[str] = mapped_column(String(100), nullable=False, default='D&D 5e')
-    dice_type: Mapped[str] = mapped_column(String(20), nullable=False, default='d100')
+    dice_type: Mapped[str] = mapped_column(String(20), nullable=False, default='d20')
 
     rows: Mapped[list["TableRow"]] = relationship(
         "TableRow",
