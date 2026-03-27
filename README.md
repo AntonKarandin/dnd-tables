@@ -11,55 +11,25 @@
 
 ## Быстрый старт
 
-### 1. Backend
-
-```bash
-cd gm-tables
-
-# Создать виртуальное окружение
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-
-# Установить зависимости
-pip install -r backend/requirements.txt
-
-# Запустить сервер (с авто-созданием БД и seed-данными)
-uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+Выходим в корневую папку программы и запускаем команду
+```
+<Полный путь к корневой папке>\.venv\Scripts\uvicorn.exe backend.main:app --host 0.0.0.0 --port 8000
 ```
 
-API будет доступно на `http://localhost:8000`  
-Swagger UI: `http://localhost:8000/docs`
-
-### 2. Frontend (режим разработки)
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Откроется на `http://localhost:5173`
+Откроется на `http://localhost:800`
 
 ### 3. Доступ с iPad
 
 Убедись, что iPad и компьютер в одной Wi-Fi сети, затем открой в браузере:
 
 ```
-http://<IP-адрес-компьютера>:5173
+http://<IP-адрес-компьютера>:800
 ```
 
 Найти IP: `ipconfig` (Windows) или `ifconfig` / `ip a` (macOS/Linux)
 
 ---
 
-## Продакшн сборка (опционально)
-
-```bash
-cd frontend && npm run build
-# Статика попадёт в frontend/dist/
-# FastAPI сам отдаст её — только uvicorn нужен
-uvicorn backend.main:app --host 0.0.0.0 --port 8000
-```
 
 ---
 
