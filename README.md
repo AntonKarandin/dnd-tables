@@ -16,19 +16,17 @@
 <Полный путь к корневой папке>\.venv\Scripts\uvicorn.exe backend.main:app --host 0.0.0.0 --port 8000
 ```
 
-Откроется на `http://localhost:800`
+Откроется на `http://localhost:8000`
 
-### 3. Доступ с iPad
+### Доступ с iPad
 
 Убедись, что iPad и компьютер в одной Wi-Fi сети, затем открой в браузере:
 
 ```
-http://<IP-адрес-компьютера>:800
+http://<IP-адрес-компьютера>:8000
 ```
 
 Найти IP: `ipconfig` (Windows) или `ifconfig` / `ip a` (macOS/Linux)
-
----
 
 
 ---
@@ -43,33 +41,3 @@ http://<IP-адрес-компьютера>:800
 | PUT    | /api/tables/{id}              | Обновить таблицу              |
 | DELETE | /api/tables/{id}              | Удалить таблицу               |
 | GET    | /api/tables/{id}/lookup?roll= | Найти результат по броску     |
-
----
-
-## Структура проекта
-
-```
-gm-tables/
-├── backend/
-│   ├── __init__.py
-│   ├── main.py          # FastAPI app, lifespan, CORS, static
-│   ├── database.py      # async engine, session, init_db
-│   ├── models.py        # SQLAlchemy ORM models
-│   ├── schemas.py       # Pydantic schemas
-│   ├── seed.py          # Дефолтные таблицы
-│   ├── requirements.txt
-│   └── routers/
-│       └── tables.py    # CRUD + lookup endpoints
-├── frontend/
-│   ├── index.html
-│   ├── vite.config.js
-│   ├── package.json
-│   └── src/
-│       ├── main.jsx
-│       ├── App.jsx
-│       ├── api/
-│       │   └── tables.js   # fetch-обёртки
-│       └── components/
-│           └── TableEditor.jsx
-└── README.md
-```
