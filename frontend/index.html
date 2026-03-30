@@ -2,11 +2,29 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>GM Tables</title>
+
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0f1420" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="GM Tables" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-180.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="/icons/apple-touch-167.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-touch-152.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-touch-120.png" />
+
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      body { overflow: hidden; }
+      body {
+        overflow: hidden;
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+      }
       input[type=number]::-webkit-inner-spin-button,
       input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
     </style>
