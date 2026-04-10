@@ -1,0 +1,11 @@
+services:
+  gm-tables:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # БД хранится на компьютере, не внутри контейнера
+      # Данные не потеряются при пересборке
+      - ./gm_tables.db:/app/gm_tables.db
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./gm_tables.db
